@@ -30,8 +30,8 @@ public struct Guid : Hashable, Comparable {
     return lhs.value == rhs.value
   }
 
-  public var hashValue: Int {
-    return value.hashValue
+  public func hash(into hasher: inout Hasher ) {
+    hasher.combine(value)
   }
 
   static public func <(lhs: Guid, rhs: Guid) -> Bool {
@@ -59,8 +59,8 @@ public struct Reference<Value : PBXObject> : Hashable, Comparable {
     return lhs.id == rhs.id
   }
 
-  public var hashValue: Int {
-    return id.hashValue
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   static public func <(lhs: Reference<Value>, rhs: Reference<Value>) -> Bool {

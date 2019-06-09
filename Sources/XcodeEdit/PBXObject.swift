@@ -205,7 +205,12 @@ public class PBXTargetDependency : PBXProjectItem {
   public let targetProxy: Reference<PBXContainerItemProxy>?
 
   public required init(id: Guid, fields: Fields, allObjects: AllObjects) throws {
-    self.targetProxy = allObjects.createReference(id: try fields.id("targetProxy"))
+    let tp = try? fields.id("targetProxy")
+
+    if let tpid = tp {
+        self.targetProxy = allObjects.createReference(id: tpid)
+    }
+    else { self.targetProxy = nil }
 
     try super.init(id: id, fields: fields, allObjects: allObjects)
   }
